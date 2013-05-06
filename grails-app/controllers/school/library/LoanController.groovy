@@ -9,6 +9,12 @@ class LoanController {
     def index() {
         redirect action: 'list', params: params
     }
+	
+	def expiredLoans( Integer max){
+		params.max = Math.min(max ?: 10, 100)
+		def map =[loanInstanceList: Loan.findByReturnDateIsNullAndExpectedReturnDateLessThan(new Date()), loanInstanceTotal: Loan.count()]
+		render( view: "list", model: map)
+	}
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
