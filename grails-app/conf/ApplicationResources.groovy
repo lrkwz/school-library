@@ -4,6 +4,7 @@ def cssminFile = "bootstrap/bootstrap.min.css"
 
 modules = {
 
+	/*
 	'bootstrap-css' {
 		resource url:[dir: 'css', file: (dev ? cssFile : cssminFile)], disposition: 'head', exclude:'minify'
 	}
@@ -84,11 +85,12 @@ modules = {
 		dependsOn 'bootstrap-css'
 		dependsOn 'bootstrap-js'
 	}
+	*/
 
 	/** application wide resources */
 	application {
-		dependsOn 'bootstrap-collapse'
-		dependsOn 'bootstrap-responsive-css'
+		//dependsOn 'bootstrap-collapse'
+		//dependsOn 'bootstrap-responsive-css'
 
 		resource url:'js/date.js'
 
