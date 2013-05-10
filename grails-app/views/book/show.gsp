@@ -6,6 +6,7 @@
 		<meta name="layout" content="bootstrap">
 		<g:set var="entityName" value="${message(code: 'book.label', default: 'Book')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
+		<r:require module="bootstrap"/>
 	</head>
 	<body>
 		<div class="row-fluid">

@@ -1,5 +1,8 @@
 import grails.util.Environment
 import groovy.time.TimeCategory
+
+import org.grails.taggable.Tag
+
 import school.library.Book
 import school.library.Loan
 import school.library.Reader
@@ -20,10 +23,24 @@ class BootStrap {
 
 				def cavallopazzo = new Book(code:"G01", author: "Giovanni Pellegrino", title: "Cavallopazzo", publisher: "Lupetti" )
 				cavallopazzo.save()
+				
+				cavallopazzo.addTag("narrativa")
+				cavallopazzo.addTag("italiano")
+				cavallopazzo.save()
 				if( cavallopazzo.hasErrors()){
 					println cavallopazzo.errors
 				}
-
+				
+				def rom = new Book(code:"G02", author: "Giovanni Pellegrino", title: "ROM genti libere", publisher: "Lupetti" )
+				rom.save()
+				
+				rom.addTag("storia")
+				rom.addTag("italiano")
+				rom.save()
+				if( rom.hasErrors()){
+					println rom.errors
+				}
+				
 				use( TimeCategory){
 					def firstLoan = new Loan(book: cavallopazzo, lender: luca, loanDate: new Date(), expectedReturnDate: new Date() + 1.month );
 					firstLoan.save()

@@ -1,7 +1,7 @@
 package school.library
+import org.grails.taggable.Taggable
 
-
-class Book /*implements Taggable*/ {
+class Book implements Taggable {
 
     static constraints = {
     }
