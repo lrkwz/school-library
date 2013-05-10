@@ -63,10 +63,10 @@
 						<f:all bean="bookInstance" />
 							<r:script>
 						    $(function() {
-						      $("#tags").select2({ tags: [],
+						      $("#tags").select2({ tags: ["Scienze_e_natura", "Narrativa", "Storia", "Arte", "Informativo"],
 						      					placeholder: 'tag this book',
 						      					autoClear: true,
-						      					minimumInputLength: 4
+						      					tokenSeparators: [",", " "]
 						      					});
 						    });
 						  </r:script>

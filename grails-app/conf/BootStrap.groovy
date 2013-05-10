@@ -31,7 +31,7 @@ class BootStrap {
 					println cavallopazzo.errors
 				}
 				
-				def rom = new Book(code:"G02", author: "Giovanni Pellegrino", title: "ROM genti libere", publisher: "Lupetti" )
+				def rom = new Book(code:"G02", author: "Santino Spinelli", title: "ROM genti libere", publisher: "Dalai Editore" )
 				rom.save()
 				
 				rom.addTag("storia")

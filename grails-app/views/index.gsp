@@ -117,6 +117,9 @@
 					</g:each>
 				</ul>
 			</div>
+			<div id="books">
+			<tc:tagCloud bean="${school.library.Book }" controller="book" action="findByTag"/>
+			</div>
 		</div>
 	</body>
 </html>

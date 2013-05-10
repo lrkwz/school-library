@@ -31,11 +31,19 @@ class BookController {
 		render Tag.findAll() as JSON
 	}
 
+	def findByTag() {
+		log.debug "Filtering book list by tag ${params}"
+		def map = [bookInstanceList: Book.findAllByTag(params.id), bookInstanceTotal: Book.countByTag(params.id)]
+		render( view: "list", model: map )
+	}
+
 	def index() {
 		redirect action: 'list', params: params
 	}
 
+
 	def list() {
+		log.debug "Returning book list ${params}"
 		params.max = Math.min(params.max ? params.int('max') : 10, 100)
 		[bookInstanceList: Book.list(params), bookInstanceTotal: Book.count()]
 	}
