@@ -47,7 +47,7 @@
 						
 							<g:sortableColumn property="email" title="${message(code: 'reader.email.label', default: 'Email')}" />
 						
-							<g:sortableColumn property="birthday" title="${message(code: 'reader.birthday.label', default: 'Birthday')}" />
+							<g:sortableColumn property="dateOfBirth" title="${message(code: 'reader.dateOfBirth.label', default: 'dateOfBirth')}" />
 						
 							<g:sortableColumn property="classRoom" title="${message(code: 'reader.classRoom.label', default: 'Class Room')}" />
 						
@@ -64,7 +64,7 @@
 						
 							<td>${fieldValue(bean: readerInstance, field: "email")}</td>
 						
-							<td><g:formatDate date="${readerInstance.birthday}" /></td>
+							<td><g:formatDate date="${readerInstance.dateOfBirth}" /></td>
 						
 							<td>${fieldValue(bean: readerInstance, field: "classRoom")}</td>
 						

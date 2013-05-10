@@ -50,10 +50,10 @@
 						
 					</g:if>
 				
-					<g:if test="${readerInstance?.birthday}">
-						<dt><g:message code="reader.birthday.label" default="Birthday" /></dt>
+					<g:if test="${readerInstance?.dateOfBirth}">
+						<dt><g:message code="reader.dateOfBirth.label" default="dateOfBirth" /></dt>
 						
-							<dd> <g:formatDate format="${message(code:"default.date.format.short")}" date="${readerInstance?.birthday}" /></dd>
+							<dd> <g:formatDate format="${message(code:"default.date.format.short")}" date="${readerInstance?.dateOfBirth}" /></dd>
 						
 					</g:if>
 				

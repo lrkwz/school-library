@@ -10,12 +10,12 @@
 	<g:field type="email" name="email" value="${readerInstance?.email}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: readerInstance, field: 'birthday', 'error')} ">
-	<label for="birthday">
-		<g:message code="reader.birthday.label" default="Birthday" />
+<div class="fieldcontain ${hasErrors(bean: readerInstance, field: 'dateOfBirth', 'error')} ">
+	<label for="dateOfBirth">
+		<g:message code="reader.dateOfBirth.label" default="dateOfBirth" />
 		
 	</label>
-	<g:datePicker name="birthday" precision="day"  value="${readerInstance?.birthday}" default="none" noSelection="['': '']" />
+	<g:datePicker name="dateOfBirth" precision="day"  value="${readerInstance?.dateOfBirth}" default="none" noSelection="['': '']" />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: readerInstance, field: 'classRoom', 'error')} ">
