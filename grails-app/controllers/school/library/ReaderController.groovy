@@ -1,11 +1,14 @@
  package school.library
 
+import grails.plugins.springsecurity.Secured
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class ReaderController {
 
     static allowedMethods = [create: ['GET', 'POST'], edit: ['GET', 'POST'], delete: 'POST']
 
+	@Secured(['ROLE_ADMIN'])	
     def index() {
         redirect action: 'list', params: params
     }

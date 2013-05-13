@@ -60,7 +60,7 @@ grails.exceptionresolver.params.exclude = ['password']
 grails.hibernate.cache.queries = true
 
 // Spring security
-grails.plugins.springsecurity.active = false
+grails.plugins.springsecurity.active = true
 
 // set per-environment serverURL stem for creating absolute links
 environments {
@@ -121,3 +121,8 @@ log4j = {
 
 app.language = "en"
 app.country = "EN"
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'it.lrkwz.school.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'it.lrkwz.school.UserRole'
+grails.plugins.springsecurity.authority.className = 'it.lrkwz.school.Role'

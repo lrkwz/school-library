@@ -47,8 +47,16 @@ grails.project.dependency.resolution = {
         //runtime ":yui-minify-resources:0.1.4"
 
         build ":tomcat:$grailsVersion"
+		
+		// Responsive
 		runtime ":twitter-bootstrap:2.3.0"
+		
+		// Tagging
 		compile ":taggable:1.0.1"
 		compile ":tagcloud:0.3"
+		
+		// Security
+		compile ':spring-security-core:1.2.7.3'
+		compile ":spring-security-ui:0.2"
     }
 }
