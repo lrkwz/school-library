@@ -126,3 +126,17 @@ app.country = "EN"
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'it.lrkwz.school.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'it.lrkwz.school.UserRole'
 grails.plugins.springsecurity.authority.className = 'it.lrkwz.school.Role'
+
+
+mail {
+	host = "smtp.sendgrid.net"
+	port = 587
+	username = "cloudbees_lrkwz"
+	password = "erccbfho"
+	/*
+	props = ["mail.smtp.auth":"true",
+			 "mail.smtp.socketFactory.port":"465",
+			 "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+			 "mail.smtp.socketFactory.fallback":"false"]
+	*/
+  }
