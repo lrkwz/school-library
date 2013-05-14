@@ -1,5 +1,4 @@
-package school.library
-import it.lrkwz.school.library.School
+package it.lrkwz.school.library
 
 import org.grails.taggable.Taggable
 

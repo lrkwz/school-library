@@ -1,6 +1,5 @@
-package school.library
+package it.lrkwz.school.library
 
-import it.lrkwz.school.library.School
 
 class Reader {
 

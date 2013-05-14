@@ -23,7 +23,7 @@
 		<g:message code="loan.book.label" default="Book" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="book" name="book.id" from="${school.library.Book.list()}" optionKey="id" required="" value="${loanInstance?.book?.id}" class="many-to-one"/>
+	<g:select id="book" name="book.id" from="${it.lrkwz.school.library.Book.list()}" optionKey="id" required="" value="${loanInstance?.book?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: loanInstance, field: 'lender', 'error')} required">
@@ -31,7 +31,7 @@
 		<g:message code="loan.lender.label" default="Lender" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="lender" name="lender.id" from="${school.library.Reader.list()}" optionKey="id" required="" value="${loanInstance?.lender?.id}" class="many-to-one"/>
+	<g:select id="lender" name="lender.id" from="${it.lrkwz.school.library.Reader.list()}" optionKey="id" required="" value="${loanInstance?.lender?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: loanInstance, field: 'loanDate', 'error')} required">

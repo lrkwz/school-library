@@ -1,8 +1,9 @@
- package school.library
+ package it.lrkwz.school.library
 
 import grails.plugins.springsecurity.Secured
 
 import org.springframework.dao.DataIntegrityViolationException
+
 
 class ReaderController {
 

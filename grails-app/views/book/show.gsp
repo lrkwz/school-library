@@ -1,5 +1,5 @@
 
-<%@ page import="school.library.Book"%>
+<%@ page import="it.lrkwz.school.library.Book"%>
 <!doctype html>
 <html>
 <head>
@@ -28,7 +28,7 @@
 						</g:link></li>
 				</ul>
 			</div>
-			<tc:tagCloud bean="${school.library.Book }" action="findByTag" />
+			<tc:tagCloud bean="${it.lrkwz.school.library.Book }" action="findByTag" />
 		</div>
 
 		<div class="span9">

@@ -118,7 +118,7 @@
 				</ul>
 			</div>
 			<div id="books">
-			<tc:tagCloud bean="${school.library.Book }" controller="book" action="findByTag"/>
+			<tc:tagCloud bean="${it.lrkwz.school.library.Book }" controller="book" action="findByTag"/>
 			</div>
 		</div>
 	</body>

@@ -1,6 +1,9 @@
-package school.library
+package it.lrkwz.school.library
 
 
+
+import it.lrkwz.school.library.Book;
+import it.lrkwz.school.library.BookController;
 
 import org.junit.*
 import grails.test.mixin.*

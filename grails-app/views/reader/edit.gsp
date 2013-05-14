@@ -1,4 +1,4 @@
-<%@ page import="school.library.Reader" %>
+<%@ page import="it.lrkwz.school.library.Reader" %>
 <!doctype html>
 <html>
 	<head>

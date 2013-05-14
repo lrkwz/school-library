@@ -1,7 +1,5 @@
 package it.lrkwz.school.library
 
-import school.library.Book;
-import school.library.Reader;
 
 /*
  * Loan status:

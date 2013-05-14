@@ -1,10 +1,11 @@
- package school.library
+ package it.lrkwz.school.library
 
 import grails.converters.JSON
 
 import org.apache.commons.logging.LogFactory
 import org.grails.taggable.Tag
 import org.springframework.dao.DataIntegrityViolationException
+
 
 class BookController {
 	private static final log = LogFactory.getLog(this)

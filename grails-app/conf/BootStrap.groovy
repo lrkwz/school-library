@@ -3,10 +3,10 @@ import groovy.time.TimeCategory
 import it.lrkwz.school.Role
 import it.lrkwz.school.User
 import it.lrkwz.school.UserRole
+import it.lrkwz.school.library.Book;
 import it.lrkwz.school.library.Loan
+import it.lrkwz.school.library.Reader;
 import it.lrkwz.school.library.School
-import school.library.Book
-import school.library.Reader
 
 class BootStrap {
 	def grailsApplication
