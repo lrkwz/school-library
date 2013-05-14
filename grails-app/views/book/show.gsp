@@ -29,7 +29,7 @@
 			</div>
 			<tc:tagCloud bean="${it.lrkwz.school.library.Book }"
 				action="findByTag" />
-			<table class="table table-condensed table-bordered">
+			<table class="table table-condensed table-bordered table-hover">
 				<caption>Loan history</caption>
 				<tbody>
 					<g:each in="${loanList }">
