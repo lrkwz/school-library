@@ -80,6 +80,7 @@ grails.plugins.springsecurity.active = true
 environments {
 	development {
 		grails.logging.jul.usebridge = true
+		grails.serverURL = "http://localhost:8080/school-library"
 	}
 	production {
 		grails.logging.jul.usebridge = false
@@ -164,3 +165,5 @@ grails {
 		 */
 	}
 }
+
+breadcrumbs.home = grails.serverURL
