@@ -47,13 +47,15 @@
 						
 							<g:sortableColumn property="email" title="${message(code: 'reader.email.label', default: 'Email')}" />
 						
-							<g:sortableColumn property="dateOfBirth" title="${message(code: 'reader.dateOfBirth.label', default: 'dateOfBirth')}" />
+							<g:sortableColumn property="dateOfBirth" title="${message(code: 'reader.dateOfBirth.label', default: 'Date Of Birth')}" />
 						
 							<g:sortableColumn property="classRoom" title="${message(code: 'reader.classRoom.label', default: 'Class Room')}" />
 						
 							<g:sortableColumn property="firstName" title="${message(code: 'reader.firstName.label', default: 'First Name')}" />
 						
 							<g:sortableColumn property="lastName" title="${message(code: 'reader.lastName.label', default: 'Last Name')}" />
+						
+							<th class="header"><g:message code="reader.school.label" default="School" /></th>
 						
 							<th></th>
 						</tr>
@@ -71,6 +73,8 @@
 							<td>${fieldValue(bean: readerInstance, field: "firstName")}</td>
 						
 							<td>${fieldValue(bean: readerInstance, field: "lastName")}</td>
+						
+							<td>${fieldValue(bean: readerInstance, field: "school")}</td>
 						
 							<td class="link">
 								<g:link action="show" id="${readerInstance.id}" class="btn btn-small">Show &raquo;</g:link>

@@ -51,7 +51,7 @@
 					</g:if>
 				
 					<g:if test="${readerInstance?.dateOfBirth}">
-						<dt><g:message code="reader.dateOfBirth.label" default="dateOfBirth" /></dt>
+						<dt><g:message code="reader.dateOfBirth.label" default="Date Of Birth" /></dt>
 						
 							<dd> <g:formatDate format="${message(code:"default.date.format.short")}" date="${readerInstance?.dateOfBirth}" /></dd>
 						
@@ -75,6 +75,13 @@
 						<dt><g:message code="reader.lastName.label" default="Last Name" /></dt>
 						
 							<dd><g:fieldValue bean="${readerInstance}" field="lastName"/></dd>
+						
+					</g:if>
+				
+					<g:if test="${readerInstance?.school}">
+						<dt><g:message code="reader.school.label" default="School" /></dt>
+						
+							<dd><g:link controller="school" action="show" id="${readerInstance?.school?.id}">${readerInstance?.school?.encodeAsHTML()}</g:link></dd>
 						
 					</g:if>
 				

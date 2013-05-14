@@ -12,7 +12,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: readerInstance, field: 'dateOfBirth', 'error')} ">
 	<label for="dateOfBirth">
-		<g:message code="reader.dateOfBirth.label" default="dateOfBirth" />
+		<g:message code="reader.dateOfBirth.label" default="Date Of Birth" />
 		
 	</label>
 	<g:datePicker name="dateOfBirth" precision="day"  value="${readerInstance?.dateOfBirth}" default="none" noSelection="['': '']" />
@@ -40,5 +40,13 @@
 		
 	</label>
 	<g:textField name="lastName" value="${readerInstance?.lastName}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: readerInstance, field: 'school', 'error')} required">
+	<label for="school">
+		<g:message code="reader.school.label" default="School" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="school" name="school.id" from="${it.lrkwz.school.library.School.list()}" optionKey="id" required="" value="${readerInstance?.school?.id}" class="many-to-one"/>
 </div>
 

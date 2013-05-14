@@ -11,7 +11,6 @@
 </head>
 <body>
 	<div class="row-fluid">
-
 		<div class="span3">
 			<div class="well">
 				<ul class="nav nav-list">
@@ -28,7 +27,23 @@
 						</g:link></li>
 				</ul>
 			</div>
-			<tc:tagCloud bean="${it.lrkwz.school.library.Book }" action="findByTag" />
+			<tc:tagCloud bean="${it.lrkwz.school.library.Book }"
+				action="findByTag" />
+			<table class="table table-condensed table-bordered">
+				<caption>Loan history</caption>
+				<tbody>
+					<g:each in="${loanList }">
+						<tr>
+							<td><g:link controller="loan" action="show" id="${it.id}">
+									<g:formatDate date="${it.loanDate}" type="date" style="SHORT" />
+								</g:link></td>
+							<td><g:link controller="loan" action="show" id="${it.id}">
+									${it.lender }
+								</g:link></td>
+						</tr>
+					</g:each>
+				</tbody>
+			</table>
 		</div>
 
 		<div class="span9">
@@ -106,9 +121,7 @@
 					</button>
 				</div>
 			</g:form>
-
 		</div>
-
 	</div>
 </body>
 </html>

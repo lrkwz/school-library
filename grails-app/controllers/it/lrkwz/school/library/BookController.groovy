@@ -80,8 +80,10 @@ class BookController {
 			redirect action: 'list'
 			return
 		}
+		
+		def loanList = Loan.findAllByBook(bookInstance)
 
-		[bookInstance: bookInstance]
+		[bookInstance: bookInstance, loanList: loanList]
 	}
 
 	def edit() {

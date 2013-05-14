@@ -5,9 +5,9 @@ package it.lrkwz.school.library
 import org.junit.*
 import grails.test.mixin.*
 
-@TestFor(ReaderController)
-@Mock(Reader)
-class ReaderControllerTests {
+@TestFor(SchoolController)
+@Mock(School)
+class SchoolControllerTests {
 
     def populateValidParams(params) {
         assert params != null
@@ -17,139 +17,139 @@ class ReaderControllerTests {
 
     void testIndex() {
         controller.index()
-        assert "/reader/list" == response.redirectedUrl
+        assert "/school/list" == response.redirectedUrl
     }
 
     void testList() {
 
         def model = controller.list()
 
-        assert model.readerInstanceList.size() == 0
-        assert model.readerInstanceTotal == 0
+        assert model.schoolInstanceList.size() == 0
+        assert model.schoolInstanceTotal == 0
     }
 
     void testCreate() {
         def model = controller.create()
 
-        assert model.readerInstance != null
+        assert model.schoolInstance != null
     }
 
     void testSave() {
         controller.save()
 
-        assert model.readerInstance != null
-        assert view == '/reader/create'
+        assert model.schoolInstance != null
+        assert view == '/school/create'
 
         response.reset()
 
         populateValidParams(params)
         controller.save()
 
-        assert response.redirectedUrl == '/reader/show/1'
+        assert response.redirectedUrl == '/school/show/1'
         assert controller.flash.message != null
-        assert Reader.count() == 1
+        assert School.count() == 1
     }
 
     void testShow() {
         controller.show()
 
         assert flash.message != null
-        assert response.redirectedUrl == '/reader/list'
+        assert response.redirectedUrl == '/school/list'
 
         populateValidParams(params)
-        def reader = new Reader(params)
+        def school = new School(params)
 
-        assert reader.save() != null
+        assert school.save() != null
 
-        params.id = reader.id
+        params.id = school.id
 
         def model = controller.show()
 
-        assert model.readerInstance == reader
+        assert model.schoolInstance == school
     }
 
     void testEdit() {
         controller.edit()
 
         assert flash.message != null
-        assert response.redirectedUrl == '/reader/list'
+        assert response.redirectedUrl == '/school/list'
 
         populateValidParams(params)
-        def reader = new Reader(params)
+        def school = new School(params)
 
-        assert reader.save() != null
+        assert school.save() != null
 
-        params.id = reader.id
+        params.id = school.id
 
         def model = controller.edit()
 
-        assert model.readerInstance == reader
+        assert model.schoolInstance == school
     }
 
     void testUpdate() {
         controller.update()
 
         assert flash.message != null
-        assert response.redirectedUrl == '/reader/list'
+        assert response.redirectedUrl == '/school/list'
 
         response.reset()
 
         populateValidParams(params)
-        def reader = new Reader(params)
+        def school = new School(params)
 
-        assert reader.save() != null
+        assert school.save() != null
 
         // test invalid parameters in update
-        params.id = reader.id
+        params.id = school.id
         //TODO: add invalid values to params object
 
         controller.update()
 
-        assert view == "/reader/edit"
-        assert model.readerInstance != null
+        assert view == "/school/edit"
+        assert model.schoolInstance != null
 
-        reader.clearErrors()
+        school.clearErrors()
 
         populateValidParams(params)
         controller.update()
 
-        assert response.redirectedUrl == "/reader/show/$reader.id"
+        assert response.redirectedUrl == "/school/show/$school.id"
         assert flash.message != null
 
         //test outdated version number
         response.reset()
-        reader.clearErrors()
+        school.clearErrors()
 
         populateValidParams(params)
-        params.id = reader.id
+        params.id = school.id
         params.version = -1
         controller.update()
 
-        assert view == "/reader/edit"
-        assert model.readerInstance != null
-        assert model.readerInstance.errors.getFieldError('version')
+        assert view == "/school/edit"
+        assert model.schoolInstance != null
+        assert model.schoolInstance.errors.getFieldError('version')
         assert flash.message != null
     }
 
     void testDelete() {
         controller.delete()
         assert flash.message != null
-        assert response.redirectedUrl == '/reader/list'
+        assert response.redirectedUrl == '/school/list'
 
         response.reset()
 
         populateValidParams(params)
-        def reader = new Reader(params)
+        def school = new School(params)
 
-        assert reader.save() != null
-        assert Reader.count() == 1
+        assert school.save() != null
+        assert School.count() == 1
 
-        params.id = reader.id
+        params.id = school.id
 
         controller.delete()
 
-        assert Reader.count() == 0
-        assert Reader.get(reader.id) == null
-        assert response.redirectedUrl == '/reader/list'
+        assert School.count() == 0
+        assert School.get(school.id) == null
+        assert response.redirectedUrl == '/school/list'
     }
 }
