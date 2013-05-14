@@ -1,5 +1,7 @@
 package school.library
 
+import it.lrkwz.school.library.School
+
 class Reader {
 
 	String firstName
@@ -7,6 +9,8 @@ class Reader {
 	String email
 	Date dateOfBirth
 	String classRoom
+
+	School school
 
 	static constraints = {
 		email(email: true, nullable:true)

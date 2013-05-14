@@ -1,8 +1,11 @@
-package school.library
+package it.lrkwz.school.library
 
 
+
+import it.lrkwz.school.library.Loan;
 
 import org.junit.*
+
 import grails.test.mixin.*
 
 @TestFor(LoanController)

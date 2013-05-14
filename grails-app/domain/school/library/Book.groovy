@@ -1,9 +1,13 @@
 package school.library
+import it.lrkwz.school.library.School
+
 import org.grails.taggable.Taggable
 
 class Book implements Taggable {
 
 	static constraints = {
+		availableStock min:0
+		maxStock min:0
 	}
 
 	String code
@@ -11,9 +15,10 @@ class Book implements Taggable {
 	String author
 	String publisher
 
-	Integer stock = 1
-
-	//String[] tags;
+	Integer maxStock = 1
+	Integer availableStock = 1
+	
+	School library
 
 	public String toString(){
 		return title;

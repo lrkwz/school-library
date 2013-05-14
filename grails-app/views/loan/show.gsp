@@ -1,5 +1,5 @@
 
-<%@ page import="school.library.Loan" %>
+<%@ page import="it.lrkwz.school.library.Loan" %>
 <!doctype html>
 <html>
 	<head>

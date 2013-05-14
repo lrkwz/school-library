@@ -3,8 +3,9 @@ import groovy.time.TimeCategory
 import it.lrkwz.school.Role
 import it.lrkwz.school.User
 import it.lrkwz.school.UserRole
+import it.lrkwz.school.library.Loan
+import it.lrkwz.school.library.School
 import school.library.Book
-import school.library.Loan
 import school.library.Reader
 
 class BootStrap {
@@ -15,10 +16,10 @@ class BootStrap {
 		def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
 		def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
 
-		def testUser = new User(username: 'admin', enabled: true, password: 'admin')
-		testUser.save(flush: true)
+		def administrator = new User(username: 'admin', enabled: true, password: 'admin')
+		administrator.save(flush: true)
 
-		UserRole.create testUser, adminRole, true
+		UserRole.create administrator, adminRole, true
 
 		assert User.count() == 1
 		assert Role.count() == 2
@@ -26,15 +27,18 @@ class BootStrap {
 
 		switch(Environment.getCurrent()){
 			case Environment.DEVELOPMENT:
+				def cavalcanti = new School( name: "Cavalcanti").save()
 
-				def luca = new Reader( firstName: "Luca", lastName:"Orlandi", email: "luca.orlandi@gmail.com" )
+				def testUser = new User(username: 'test', enabled: true, password: 'test', school: cavalcanti).save()
+
+				def luca = new Reader( firstName: "Luca", lastName:"Orlandi", email: "luca.orlandi@gmail.com", school: cavalcanti )
 				luca.save()
 
 				if( luca.hasErrors()){
 					println luca.errors
 				}
 
-				def cavallopazzo = new Book(code:"G01", author: "Giovanni Pellegrino", title: "Cavallopazzo", publisher: "Lupetti" )
+				def cavallopazzo = new Book(code:"G01", author: "Giovanni Pellegrino", title: "Cavallopazzo", publisher: "Lupetti", library: cavalcanti )
 				cavallopazzo.save()
 
 				cavallopazzo.addTag("narrativa")
@@ -44,7 +48,7 @@ class BootStrap {
 					println cavallopazzo.errors
 				}
 
-				def rom = new Book(code:"G02", author: "Santino Spinelli", title: "ROM genti libere", publisher: "Dalai Editore" )
+				def rom = new Book(code:"G02", author: "Santino Spinelli", title: "ROM genti libere", publisher: "Dalai Editore", library: cavalcanti )
 				rom.save()
 
 				rom.addTag("storia")
@@ -52,14 +56,6 @@ class BootStrap {
 				rom.save()
 				if( rom.hasErrors()){
 					println rom.errors
-				}
-
-				use( TimeCategory){
-					def firstLoan = new Loan(book: cavallopazzo, lender: luca, loanDate: new Date(), expectedReturnDate: new Date() + 1.month );
-					firstLoan.save()
-					if( firstLoan.hasErrors()){
-						println firstLoan.errors
-					}
 				}
 
 				break

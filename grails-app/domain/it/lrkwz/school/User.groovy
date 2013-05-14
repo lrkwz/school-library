@@ -1,5 +1,7 @@
 package it.lrkwz.school
 
+import it.lrkwz.school.library.School
+
 class User {
 
 	transient springSecurityService
@@ -11,14 +13,15 @@ class User {
 	boolean accountLocked
 	boolean passwordExpired
 
+	School school
+
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+		school(nullable:true)
 	}
 
-	static mapping = {
-		password column: '`password`'
-	}
+	static mapping = { password column: '`password`' }
 
 	Set<Role> getAuthorities() {
 		UserRole.findAllByUser(this).collect { it.role } as Set

@@ -4,4 +4,10 @@ class School {
 
     static constraints = {
     }
+	
+	String name
+	
+	String toString(){
+		return name;
+	}
 }

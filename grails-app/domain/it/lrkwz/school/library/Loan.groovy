@@ -1,5 +1,14 @@
-package school.library
+package it.lrkwz.school.library
 
+import school.library.Book;
+import school.library.Reader;
+
+/*
+ * Loan status:
+ * 
+ * - active -> returnDate = null
+ * - closed -> returnDate != null 
+ */
 class Loan {
 
 	Book book;
