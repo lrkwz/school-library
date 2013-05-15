@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<meta name="layout" content="bootstrap" />
+<meta name="layout" content="main" />
 <style type="text/css" media="screen">
 #status {
 	background-color: #eee;
