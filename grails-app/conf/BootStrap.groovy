@@ -14,6 +14,7 @@ class BootStrap {
 	def init = { servletContext ->
 
 		def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+		def librarianRole = new Role(authority: 'ROLE_LIBRARIAN').save(flush: true)
 		def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
 
 		def administrator = new User(username: 'admin', enabled: true, password: 'admin')
@@ -22,14 +23,16 @@ class BootStrap {
 		UserRole.create administrator, adminRole, true
 
 		assert User.count() == 1
-		assert Role.count() == 2
+		assert Role.count() == 3
 		assert UserRole.count() == 1
 
 		switch(Environment.getCurrent()){
 			case Environment.DEVELOPMENT:
 				def cavalcanti = new School( name: "Cavalcanti").save()
 
-				def testUser = new User(username: 'test', enabled: true, password: 'test', school: cavalcanti).save()
+				def librarianUser = new User(username: 'librarian', enabled: true, password: 'password', school: cavalcanti).save()
+				UserRole.create librarianUser, librarianRole, true
+				def testUser = new User(username: 'test', enabled: true, password: 'password', school: cavalcanti).save()
 
 				def luca = new Reader( firstName: "Luca", lastName:"Orlandi", email: "luca.orlandi@gmail.com", school: cavalcanti )
 				luca.save()
