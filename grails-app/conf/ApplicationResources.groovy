@@ -44,9 +44,10 @@ modules = {
 		resource url:'js/test-index.js'
 	}
 
-	crumbs {
+	crumbs {/*
 		resource url: 'plugins/breadcrumbs-0.5.2/js/jquery.easing.js'
 		resource url: 'plugins/breadcrumbs-0.5.2/js/jquery.jBreadCrumb.js'
 		resource url: 'plugins/breadcrumbs-0.5.2/css/BreadCrumb.css'
+		*/
 	}
 }
