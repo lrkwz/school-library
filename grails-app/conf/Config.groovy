@@ -1,5 +1,6 @@
-// locations to search for config files that get merged into the main config
-// config files can either be Java properties files or ConfigSlurper scripts
+// locations to search for config files that get merged into the main config;
+// config files can be ConfigSlurper scripts, Java properties files, or classes
+// in the classpath in ConfigSlurper format
 
 // grails.config.locations = [ "classpath:${appName}-config.properties",
 //                             "classpath:${appName}-config.groovy",
@@ -10,47 +11,32 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
-
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
-grails.mime.types = [ html: [
-		'text/html',
-		'application/xhtml+xml'
-	],
-	xml: [
-		'text/xml',
-		'application/xml'
-	],
-	text: 'text/plain',
-	js: 'text/javascript',
-	rss: 'application/rss+xml',
-	atom: 'application/atom+xml',
-	css: 'text/css',
-	csv: 'text/csv',
-	all: '*/*',
-	json: [
-		'application/json',
-		'text/json'
-	],
-	form: 'application/x-www-form-urlencoded',
-	multipartForm: 'multipart/form-data'
+grails.mime.types = [
+    all:           '*/*',
+    atom:          'application/atom+xml',
+    css:           'text/css',
+    csv:           'text/csv',
+    form:          'application/x-www-form-urlencoded',
+    html:          ['text/html','application/xhtml+xml'],
+    js:            'text/javascript',
+    json:          ['application/json', 'text/json'],
+    multipartForm: 'multipart/form-data',
+    rss:           'application/rss+xml',
+    text:          'text/plain',
+    xml:           ['text/xml', 'application/xml']
 ]
 
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
 
 // What URL patterns should be processed by the resources plugin
-grails.resources.adhoc.patterns = [
-	'/images/*',
-	'/css/*',
-	'/js/*',
-	'/plugins/*'
-]
-
+grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
 
 // The default codec used to encode data with ${}
-grails.views.default.codec = "html" // none, html, base64
+grails.views.default.codec = "none" // none, html, base64
 grails.views.gsp.encoding = "UTF-8"
 grails.converters.encoding = "UTF-8"
 // enable Sitemesh preprocessing of GSP pages
@@ -70,100 +56,36 @@ grails.web.disable.multipart=false
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 
-// enable query caching by default
-grails.hibernate.cache.queries = true
+// configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
+grails.hibernate.cache.queries = false
 
-// Spring security
-grails.plugins.springsecurity.active = true
-
-// set per-environment serverURL stem for creating absolute links
 environments {
-	development {
-		grails.logging.jul.usebridge = true
-		grails.serverURL = "http://localhost:8080/school-library"
-	}
-	production {
-		grails.logging.jul.usebridge = false
-		// TODO: grails.serverURL = "http://www.changeme.com"
-	}
+    development {
+        grails.logging.jul.usebridge = true
+    }
+    production {
+        grails.logging.jul.usebridge = false
+        // TODO: grails.serverURL = "http://www.changeme.com"
+    }
 }
 
 // log4j configuration
 log4j = {
-	// Example of changing the log pattern for the default console
-	// appender:
-	//
-	appenders {
-		console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-		appender new org.apache.log4j.DailyRollingFileAppender(
-				name: 'dailyAppender',
-				datePattern: "'.'yyyy-MM-dd",  // See the API for all patterns.
-				fileName: "log/app.log",
-				layout: pattern(conversionPattern: '%d [%t] %-5p %c{2} %x - %m%n')
-				)
-	}
+    // Example of changing the log pattern for the default console appender:
+    //
+    //appenders {
+    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+    //}
 
-	error dailyAppender:[
-		"StackTrace",
-		'org.codehaus.groovy.grails.web.servlet',
-		//  controllers
-		'org.codehaus.groovy.grails.web.pages',
-		//  GSP
-		'org.codehaus.groovy.grails.web.sitemesh',
-		//  layouts
-		'org.codehaus.groovy.grails.web.mapping.filter',
-		// URL mapping
-		'org.codehaus.groovy.grails.web.mapping',
-		// URL mapping
-		'org.codehaus.groovy.grails.commons',
-		// core / classloading
-		'org.codehaus.groovy.grails.plugins',
-		// plugins
-		'org.codehaus.groovy.grails.orm.hibernate',
-		// hibernate integration
-		'org.springframework',
-		'org.hibernate',
-		'net.sf.ehcache.hibernate'
-	]
-	error   'org.codehaus.groovy.grails.web.servlet',  //  controllers
-			'org.codehaus.groovy.grails.web.pages', //  GSP
-			'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-			'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-			'org.codehaus.groovy.grails.web.mapping', // URL mapping
-			'org.codehaus.groovy.grails.commons', // core / classloading
-			'org.codehaus.groovy.grails.plugins', // plugins
-			'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-			'org.springframework',
-			'org.hibernate',
-			'net.sf.ehcache.hibernate'
-
-	debug 'school.library'
+    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
+           'org.codehaus.groovy.grails.web.pages',          // GSP
+           'org.codehaus.groovy.grails.web.sitemesh',       // layouts
+           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+           'org.codehaus.groovy.grails.web.mapping',        // URL mapping
+           'org.codehaus.groovy.grails.commons',            // core / classloading
+           'org.codehaus.groovy.grails.plugins',            // plugins
+           'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+           'org.springframework',
+           'org.hibernate',
+           'net.sf.ehcache.hibernate'
 }
-
-
-/**  Application specific setting */
-
-app.language = "en"
-app.country = "EN"
-
-// Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'it.lrkwz.school.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'it.lrkwz.school.UserRole'
-grails.plugins.springsecurity.authority.className = 'it.lrkwz.school.Role'
-
-grails {
-	mail {
-		host = "smtp.sendgrid.net"
-		port = 587
-		username = "cloudbees_lrkwz"
-		password = "erccbfho"
-		/*
-		 props = ["mail.smtp.auth":"true",
-		 "mail.smtp.socketFactory.port":"465",
-		 "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
-		 "mail.smtp.socketFactory.fallback":"false"]
-		 */
-	}
-}
-
-breadcrumbs.home = grails.serverURL
