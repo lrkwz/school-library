@@ -51,11 +51,11 @@
 						</tr>
 					</thead>
 					<tbody>
-					<g:each in="${schoolInstanceList}" var="schoolInstance">
-						<tr>
+					<g:each in="${schoolInstanceList}" status="i" var="schoolInstance">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						
-							<td>${fieldValue(bean: schoolInstance, field: "name")}</td>
-						
+						<td><g:link action="show" id="${schoolInstance.id}">${fieldValue(bean: schoolInstance, field: "name")}</g:link></td>
+					
 							<td class="link">
 								<g:link action="show" id="${schoolInstance.id}" class="btn btn-small">Show &raquo;</g:link>
 							</td>

@@ -51,7 +51,7 @@
 				</g:hasErrors>
 
 				<fieldset>
-					<g:form class="form-horizontal" action="create" >
+					<g:form class="form-horizontal" action="save" >
 						<fieldset>
 							<f:all bean="schoolInstance"/>
 							<div class="form-actions">
