@@ -59,5 +59,23 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.3.2"
 
         compile ':cache:1.0.1'
-    }
+
+		// Responsive
+		runtime ":twitter-bootstrap:2.3.0"
+
+		// Tagging
+		compile ":taggable:1.0.1"
+		compile ":tagcloud:0.3"
+
+		// Security
+		compile ':spring-security-core:1.2.7.3'
+		compile ":spring-security-ui:0.2"
+		compile ":jquery-ui:1.8.24"
+		compile ":famfamfam:1.0.1"
+		compile ":mail:1.0.1"
+		compile ":webxml:1.4.1"
+
+		//compile ":breadcrumbs:0.5.2"
+		compile ":bootstrap-crumbs:1.0.2"
+	    }
 }
