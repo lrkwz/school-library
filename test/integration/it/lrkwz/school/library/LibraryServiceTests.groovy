@@ -1,20 +1,63 @@
 package it.lrkwz.school.library
 
-
-
-import grails.test.mixin.*
-
+import static org.junit.Assert.*
 import org.junit.*
 
-/**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
- */
-@TestFor(LibraryService)
 class LibraryServiceTests {
+
+	@Before
+	void setUp() {
+		// Setup logic here
+	}
+
+	@After
+	void tearDown() {
+		// Tear down logic here
+	}
 
 	def LibraryService libraryService
 
+	@Test
 	void testLeanBook() {
+		def school = new School( name: "Cavalcanti").save()
+		
+		def book = libraryService.saveBook(author:"Giovanni Pellegrino",
+								title: "Cavallopazzo",
+								libraryName: "Cavalcanti",
+								[
+									[publisher: "Lupetti", code: "G01", publishedOn: new Date()],
+									[publisher: "Einaudi", code: "G02", publishedOn: new Date()]
+								])
+
+		def luca = new Student( firstName: "Luca", school: school)
+		def borrowedVolume = libraryService.leanBook(book, luca)
+		assert Book.findByTitle( "Cavallopazzo").getAvailableVolume() != null
+
+		def mario = new Student( firstName: "Mario", school: school)
+		libraryService.leanBook(book, mario)		
+		assert Book.findByTitle( "Cavallopazzo").getAvailableVolume() == null
+		
+		libraryService.returnBook(borrowedVolume, luca)		
+		assert Book.findByTitle( "Cavallopazzo").getAvailableVolume() != null
+	}
+
+	@Test
+	void testCreateBookService(){
+		def book = libraryService.saveBook(author:"Giovanni Pellegrino",
+								title: "Cavallopazzo",
+								libraryName: "Cavalcanti",
+								[
+									[publisher: "Lupetti", code: "G01", publishedOn: new Date()],
+									[publisher: "Einaudi", code: "G02", publishedOn: new Date()]
+								])
+		
+		println book
+		assert Book.findByTitle( "Cavallopazzo").count == 1
+		assert Book.findByTitle( "Cavallopazzo").getAvailableVolume() != null
+	}
+
+	@Test
+	void testCreateBook() {
 		def cavalcanti = new School( name: "Cavalcanti").save()
 		def volg01 = new Volume(publisher: "Lupetti", code: "G01", publishedOn: new Date()).save()
 		def volg02 = new Volume(publisher: "Einaudi", code: "G02", publishedOn: new Date()).save()
@@ -32,30 +75,5 @@ class LibraryServiceTests {
 		println cavallopazzo
 		assert Book.count() == 1
 		assert Book.findByTitle("Cavallopazzo").getVolumes().size() == 3
-
-		def luca = new Student( firstName: "Luca", school: cavalcanti)
-
-		def lendedVolume = libraryService.leanBook(cavallopazzo, luca)
-	}
-
-	@Test
-	void testCreateBook() {
-		def cavalcanti = new School( name: "Cavalcanti")
-		def volg01 = new Volume(publisher: "Lupetti", code: "G01", publishedOn: new Date())
-		def volg02 = new Volume(publisher: "Einaudi", code: "G02", publishedOn: new Date())
-
-		def cavallopazzo = new Book(
-				author: "Giovanni Pellegrino",
-				title: "Cavallopazzo",
-				library: cavalcanti,
-				volumes: [
-					volg01,
-					volg02,
-					new Volume(publisher: "Feltrinelli", code: "G03", publishedOn: new Date())]
-				)
-
-		println cavallopazzo
-		//assert Book.count() == 1
-		//assert Book.findByTitle("Cavallopazzo").getVolumes().size() == 3
 	}
 }
