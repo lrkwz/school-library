@@ -5,9 +5,9 @@ package it.lrkwz.school.library
 import org.junit.*
 import grails.test.mixin.*
 
-@TestFor(ReaderController)
-@Mock(Reader)
-class ReaderControllerTests {
+@TestFor(StudentController)
+@Mock(Student)
+class StudentControllerTests {
 
     def populateValidParams(params) {
         assert params != null
@@ -47,7 +47,7 @@ class ReaderControllerTests {
 
         assert response.redirectedUrl == '/reader/show/1'
         assert controller.flash.message != null
-        assert Reader.count() == 1
+        assert Student.count() == 1
     }
 
     void testShow() {
@@ -57,7 +57,7 @@ class ReaderControllerTests {
         assert response.redirectedUrl == '/reader/list'
 
         populateValidParams(params)
-        def reader = new Reader(params)
+        def reader = new Student(params)
 
         assert reader.save() != null
 
@@ -75,7 +75,7 @@ class ReaderControllerTests {
         assert response.redirectedUrl == '/reader/list'
 
         populateValidParams(params)
-        def reader = new Reader(params)
+        def reader = new Student(params)
 
         assert reader.save() != null
 
@@ -95,7 +95,7 @@ class ReaderControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def reader = new Reader(params)
+        def reader = new Student(params)
 
         assert reader.save() != null
 
@@ -139,17 +139,17 @@ class ReaderControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def reader = new Reader(params)
+        def reader = new Student(params)
 
         assert reader.save() != null
-        assert Reader.count() == 1
+        assert Student.count() == 1
 
         params.id = reader.id
 
         controller.delete()
 
-        assert Reader.count() == 0
-        assert Reader.get(reader.id) == null
+        assert Student.count() == 0
+        assert Student.get(reader.id) == null
         assert response.redirectedUrl == '/reader/list'
     }
 }

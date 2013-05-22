@@ -5,7 +5,7 @@ import it.lrkwz.school.User
 import it.lrkwz.school.UserRole
 import it.lrkwz.school.library.Book;
 import it.lrkwz.school.library.Loan
-import it.lrkwz.school.library.Reader;
+import it.lrkwz.school.library.Student;
 import it.lrkwz.school.library.School
 
 class BootStrap {
@@ -34,7 +34,7 @@ class BootStrap {
 				UserRole.create librarianUser, librarianRole, true
 				def testUser = new User(username: 'test', enabled: true, password: 'password', school: cavalcanti).save()
 
-				def luca = new Reader( firstName: "Luca", lastName:"Orlandi", email: "luca.orlandi@gmail.com", school: cavalcanti )
+				def luca = new Student( firstName: "Luca", lastName:"Orlandi", email: "luca.orlandi@gmail.com", school: cavalcanti )
 				luca.save()
 
 				if( luca.hasErrors()){

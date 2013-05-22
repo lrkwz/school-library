@@ -39,7 +39,7 @@ grails.project.dependency.resolution = {
 	plugins {
 		compile ":fields:1.3"
 		runtime ":hibernate:$grailsVersion"
-		runtime ":jquery:1.7.2"
+		runtime ":jquery:1.8.3"
 		runtime ":resources:1.1.6"
 		// Uncomment these (or add new ones) to enable additional resources capabilities
 		//runtime ":zipped-resources:1.0"
@@ -63,7 +63,6 @@ grails.project.dependency.resolution = {
 		compile ":mail:1.0.1"
 		compile ":webxml:1.4.1"
 
-		//compile ":breadcrumbs:0.5.2"
 		compile ":bootstrap-crumbs:1.0.2"
 	}
 }

@@ -2,7 +2,7 @@ package it.lrkwz.school.library
 
 import org.springframework.dao.DataIntegrityViolationException
 
-class ReaderController {
+class StudentController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -12,15 +12,15 @@ class ReaderController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [readerInstanceList: Reader.list(params), readerInstanceTotal: Reader.count()]
+        [readerInstanceList: Student.list(params), readerInstanceTotal: Student.count()]
     }
 
     def create() {
-        [readerInstance: new Reader(params)]
+        [readerInstance: new Student(params)]
     }
 
     def save() {
-        def readerInstance = new Reader(params)
+        def readerInstance = new Student(params)
         if (!readerInstance.save(flush: true)) {
             render(view: "create", model: [readerInstance: readerInstance])
             return
@@ -31,7 +31,7 @@ class ReaderController {
     }
 
     def show(Long id) {
-        def readerInstance = Reader.get(id)
+        def readerInstance = Student.get(id)
         if (!readerInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'reader.label', default: 'Reader'), id])
             redirect(action: "list")
@@ -42,7 +42,7 @@ class ReaderController {
     }
 
     def edit(Long id) {
-        def readerInstance = Reader.get(id)
+        def readerInstance = Student.get(id)
         if (!readerInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'reader.label', default: 'Reader'), id])
             redirect(action: "list")
@@ -53,7 +53,7 @@ class ReaderController {
     }
 
     def update(Long id, Long version) {
-        def readerInstance = Reader.get(id)
+        def readerInstance = Student.get(id)
         if (!readerInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'reader.label', default: 'Reader'), id])
             redirect(action: "list")
@@ -82,7 +82,7 @@ class ReaderController {
     }
 
     def delete(Long id) {
-        def readerInstance = Reader.get(id)
+        def readerInstance = Student.get(id)
         if (!readerInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'reader.label', default: 'Reader'), id])
             redirect(action: "list")

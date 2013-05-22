@@ -1,5 +1,5 @@
 
-<%@ page import="it.lrkwz.school.library.Reader" %>
+<%@ page import="it.lrkwz.school.library.Student" %>
 <!doctype html>
 <html>
 	<head>

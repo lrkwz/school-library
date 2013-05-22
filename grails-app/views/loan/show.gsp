@@ -67,7 +67,7 @@
 					<g:if test="${loanInstance?.lender}">
 						<dt><g:message code="loan.lender.label" default="Lender" /></dt>
 						
-							<dd><g:link controller="reader" action="show" id="${loanInstance?.lender?.id}">${loanInstance?.lender?.encodeAsHTML()}</g:link></dd>
+							<dd><g:link controller="student" action="show" id="${loanInstance?.lender?.id}">${loanInstance?.lender?.encodeAsHTML()}</g:link></dd>
 						
 					</g:if>
 				

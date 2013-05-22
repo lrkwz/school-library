@@ -31,7 +31,7 @@
 		<g:message code="loan.lender.label" default="Lender" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="lender" name="lender.id" from="${it.lrkwz.school.library.Reader.list()}" optionKey="id" required="" value="${loanInstance?.lender?.id}" class="many-to-one"/>
+	<g:select id="lender" name="lender.id" from="${it.lrkwz.school.library.Student.list()}" optionKey="id" required="" value="${loanInstance?.lender?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: loanInstance, field: 'loanDate', 'error')} required">

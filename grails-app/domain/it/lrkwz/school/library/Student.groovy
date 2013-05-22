@@ -1,7 +1,7 @@
 package it.lrkwz.school.library
 
 
-class Reader {
+class Student {
 
 	String firstName
 	String lastName

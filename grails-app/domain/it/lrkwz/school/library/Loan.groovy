@@ -10,7 +10,7 @@ package it.lrkwz.school.library
 class Loan {
 
 	Book book;
-	Reader lender;
+	Student lender;
 	Date loanDate;
 	Date expectedReturnDate;
 	Date returnDate = null;

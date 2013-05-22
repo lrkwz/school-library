@@ -2,8 +2,8 @@ package it.lrkwz.school.library
 
 
 
-import it.lrkwz.school.library.Book;
 import grails.test.mixin.*
+
 import org.junit.*
 
 /**
@@ -12,7 +12,10 @@ import org.junit.*
 @TestFor(Book)
 class BookTests {
 
-    void testSomething() {
-       fail "Implement me"
-    }
+	void testSomething() {
+		def cavalcanti = new School( name: "Cavalcanti")
+		def cavallopazzo = new Book(author: "Giovanni Pellegrino", title: "Cavallopazzo", library: cavalcanti ).save()
+		
+		assert Book.count() == 1
+	}
 }
