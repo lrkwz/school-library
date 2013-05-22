@@ -12,147 +12,150 @@ import grails.test.mixin.*
 @Mock(Book)
 class BookControllerTests {
 
-    def populateValidParams(params) {
-        assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-    }
+	def populateValidParams(params) {
+		assert params != null
+		// TODO: Populate valid properties like...
+		params["title"] = 'Cavallopazzo'
+		params["author"]= "Giovanni Pellegrino"
+	}
 
-    void testIndex() {
-        controller.index()
-        assert "/book/list" == response.redirectedUrl
-    }
+	void testIndex() {
+		controller.index()
+		assert "/book/list" == response.redirectedUrl
+	}
 
-    void testList() {
+	void testList() {
 
-        def model = controller.list()
+		def model = controller.list()
 
-        assert model.bookInstanceList.size() == 0
-        assert model.bookInstanceTotal == 0
-    }
+		assert model.bookInstanceList.size() == 0
+		assert model.bookInstanceTotal == 0
+	}
 
-    void testCreate() {
-        def model = controller.create()
+	void testCreate() {
+		request.method = "GET"
+		def model = controller.create()
 
-        assert model.bookInstance != null
-    }
+		assert model.bookInstance != null
+	}
 
-    void testSave() {
-        controller.save()
+	void testSave() {
+		/*
+		 request.method = "GET"
+		 controller.edit()
+		 assert model.bookInstance != null
+		 assert view == '/book/create'
+		 response.reset()
+		 */
+		populateValidParams(params)
+		request.method = "POST"
+		controller.edit()
 
-        assert model.bookInstance != null
-        assert view == '/book/create'
+		assert response.redirectedUrl == '/book/show/1'
+		assert controller.flash.message != null
+		assert Book.count() == 1
+	}
 
-        response.reset()
+	void testShow() {
+		controller.show()
 
-        populateValidParams(params)
-        controller.save()
+		assert flash.message != null
+		assert response.redirectedUrl == '/book/list'
 
-        assert response.redirectedUrl == '/book/show/1'
-        assert controller.flash.message != null
-        assert Book.count() == 1
-    }
+		populateValidParams(params)
+		def book = new Book(params)
 
-    void testShow() {
-        controller.show()
+		assert book.save() != null
 
-        assert flash.message != null
-        assert response.redirectedUrl == '/book/list'
+		params.id = book.id
 
-        populateValidParams(params)
-        def book = new Book(params)
+		def model = controller.show()
 
-        assert book.save() != null
+		assert model.bookInstance == book
+	}
 
-        params.id = book.id
+	void testEdit() {
+		controller.edit()
 
-        def model = controller.show()
+		assert flash.message != null
+		assert response.redirectedUrl == '/book/list'
 
-        assert model.bookInstance == book
-    }
+		populateValidParams(params)
+		def book = new Book(params)
 
-    void testEdit() {
-        controller.edit()
+		assert book.save() != null
 
-        assert flash.message != null
-        assert response.redirectedUrl == '/book/list'
+		params.id = book.id
 
-        populateValidParams(params)
-        def book = new Book(params)
+		def model = controller.edit()
 
-        assert book.save() != null
+		assert model.bookInstance == book
+	}
 
-        params.id = book.id
+	void testUpdate() {
+		controller.update()
 
-        def model = controller.edit()
+		assert flash.message != null
+		assert response.redirectedUrl == '/book/list'
 
-        assert model.bookInstance == book
-    }
+		response.reset()
 
-    void testUpdate() {
-        controller.update()
+		populateValidParams(params)
+		def book = new Book(params)
 
-        assert flash.message != null
-        assert response.redirectedUrl == '/book/list'
+		assert book.save() != null
 
-        response.reset()
+		// test invalid parameters in update
+		params.id = book.id
+		//TODO: add invalid values to params object
 
-        populateValidParams(params)
-        def book = new Book(params)
+		controller.update()
 
-        assert book.save() != null
+		assert view == "/book/edit"
+		assert model.bookInstance != null
 
-        // test invalid parameters in update
-        params.id = book.id
-        //TODO: add invalid values to params object
+		book.clearErrors()
 
-        controller.update()
+		populateValidParams(params)
+		controller.update()
 
-        assert view == "/book/edit"
-        assert model.bookInstance != null
+		assert response.redirectedUrl == "/book/show/$book.id"
+		assert flash.message != null
 
-        book.clearErrors()
+		//test outdated version number
+		response.reset()
+		book.clearErrors()
 
-        populateValidParams(params)
-        controller.update()
+		populateValidParams(params)
+		params.id = book.id
+		params.version = -1
+		controller.update()
 
-        assert response.redirectedUrl == "/book/show/$book.id"
-        assert flash.message != null
+		assert view == "/book/edit"
+		assert model.bookInstance != null
+		assert model.bookInstance.errors.getFieldError('version')
+		assert flash.message != null
+	}
 
-        //test outdated version number
-        response.reset()
-        book.clearErrors()
+	void testDelete() {
+		controller.delete()
+		assert flash.message != null
+		assert response.redirectedUrl == '/book/list'
 
-        populateValidParams(params)
-        params.id = book.id
-        params.version = -1
-        controller.update()
+		response.reset()
 
-        assert view == "/book/edit"
-        assert model.bookInstance != null
-        assert model.bookInstance.errors.getFieldError('version')
-        assert flash.message != null
-    }
+		populateValidParams(params)
+		def book = new Book(params)
 
-    void testDelete() {
-        controller.delete()
-        assert flash.message != null
-        assert response.redirectedUrl == '/book/list'
+		assert book.save() != null
+		assert Book.count() == 1
 
-        response.reset()
+		params.id = book.id
 
-        populateValidParams(params)
-        def book = new Book(params)
+		controller.delete()
 
-        assert book.save() != null
-        assert Book.count() == 1
-
-        params.id = book.id
-
-        controller.delete()
-
-        assert Book.count() == 0
-        assert Book.get(book.id) == null
-        assert response.redirectedUrl == '/book/list'
-    }
+		assert Book.count() == 0
+		assert Book.get(book.id) == null
+		assert response.redirectedUrl == '/book/list'
+	}
 }
