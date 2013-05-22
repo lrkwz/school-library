@@ -7,6 +7,8 @@ class Book implements Taggable {
 	private static final log = LogFactory.getLog(this)
 	
 	static constraints = {
+		title blank:false
+		author blank:false
 	}
 
 	String title

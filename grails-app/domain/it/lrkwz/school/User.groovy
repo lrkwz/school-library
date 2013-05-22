@@ -17,8 +17,8 @@ class User {
 
 	static constraints = {
 		username blank: false, unique: true
-		password blank: false
-		school(nullable:true)
+		password blank: false, password:true
+		school nullable:true 
 	}
 
 	static mapping = { password column: '`password`' }
