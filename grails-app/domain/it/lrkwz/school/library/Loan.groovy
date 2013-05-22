@@ -9,7 +9,7 @@ package it.lrkwz.school.library
  */
 class Loan {
 
-	Book book;
+	Volume book;
 	Student lender;
 	Date loanDate;
 	Date expectedReturnDate;

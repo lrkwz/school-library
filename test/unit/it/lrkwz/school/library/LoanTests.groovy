@@ -2,8 +2,9 @@ package it.lrkwz.school.library
 
 
 
-import it.lrkwz.school.library.Loan;
 import grails.test.mixin.*
+import groovy.time.TimeCategory
+
 import org.junit.*
 
 /**
@@ -11,20 +12,21 @@ import org.junit.*
  */
 @TestFor(Loan)
 class LoanTests {
-	
+
 	void testLoan(){
-		
+
+		def cavallopazzo = new Book(title: "Cavallopazzo", volumes: [new Volume(code:"G01", isAvailable: true)])
+		def Student luca = new Student( firstName: "Luca")
+
+		println "Using " + cavallopazzo
+		cavallopazzo.getVolumes().each { println ("Volume: " +  it.toString()  + " " + it.getIsAvailable())}
+
 		use( TimeCategory){
-			def firstLoan = new Loan(book: cavallopazzo, lender: luca, loanDate: new Date(), expectedReturnDate: new Date() + 1.month );
+			def firstLoan = new Loan(book: cavallopazzo.getAvailableVolume(), lender: luca, loanDate: new Date(), expectedReturnDate: new Date() + 1.month );
 			firstLoan.save()
 			if( firstLoan.hasErrors()){
 				println firstLoan.errors
 			}
 		}
-
 	}
-
-    void testSomething() {
-       fail "Implement me"
-    }
 }

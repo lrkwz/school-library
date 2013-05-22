@@ -3,7 +3,7 @@ package it.lrkwz.school.library
 import static org.junit.Assert.*
 import org.junit.*
 
-class BookTests {
+class LibraryTests {
 
 	@Before
 	void setUp() {
