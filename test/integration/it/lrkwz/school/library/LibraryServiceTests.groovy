@@ -20,37 +20,38 @@ class LibraryServiceTests {
 	@Test
 	void testLeanBook() {
 		def school = new School( name: "Cavalcanti").save()
-		
-		def book = libraryService.saveBook(author:"Giovanni Pellegrino",
-								title: "Cavallopazzo",
-								libraryName: "Cavalcanti",
-								[
-									[publisher: "Lupetti", code: "G01", publishedOn: new Date()],
-									[publisher: "Einaudi", code: "G02", publishedOn: new Date()]
-								])
 
-		def luca = new Student( firstName: "Luca", school: school)
+		def book = libraryService.saveBook(author:"Giovanni Pellegrino",
+		title: "Cavallopazzo",
+		libraryName: "Cavalcanti",
+		[
+			[publisher: "Lupetti", code: "G01", publishedOn: new Date()],
+			[publisher: "Einaudi", code: "G02", publishedOn: new Date()]
+		])
+
+		def luca = new Student( firstName: "Luca", lastName:"Orlandi", school: school).save()
 		def borrowedVolume = libraryService.leanBook(book, luca)
 		assert Book.findByTitle( "Cavallopazzo").getAvailableVolume() != null
 
-		def mario = new Student( firstName: "Mario", school: school)
-		libraryService.leanBook(book, mario)		
+		def mario = new Student( firstName: "Mario", lastName: "Rossi", school: school).save()
+		libraryService.leanBook(book, mario)
 		assert Book.findByTitle( "Cavallopazzo").getAvailableVolume() == null
-		
-		libraryService.returnBook(borrowedVolume, luca)		
+
+		Loan loan = libraryService.returnBook(borrowedVolume, luca)
+		println loan
 		assert Book.findByTitle( "Cavallopazzo").getAvailableVolume() != null
 	}
 
 	@Test
 	void testCreateBookService(){
 		def book = libraryService.saveBook(author:"Giovanni Pellegrino",
-								title: "Cavallopazzo",
-								libraryName: "Cavalcanti",
-								[
-									[publisher: "Lupetti", code: "G01", publishedOn: new Date()],
-									[publisher: "Einaudi", code: "G02", publishedOn: new Date()]
-								])
-		
+		title: "Cavallopazzo",
+		libraryName: "Cavalcanti",
+		[
+			[publisher: "Lupetti", code: "G01", publishedOn: new Date()],
+			[publisher: "Einaudi", code: "G02", publishedOn: new Date()]
+		])
+
 		println book
 		assert Book.findByTitle( "Cavallopazzo").count == 1
 		assert Book.findByTitle( "Cavallopazzo").getAvailableVolume() != null

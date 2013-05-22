@@ -167,3 +167,5 @@ grails {
 }
 
 breadcrumbs.home = grails.serverURL
+
+grails.gorm.failOnError = true
