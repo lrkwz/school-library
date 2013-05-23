@@ -81,7 +81,10 @@ class BookController {
 			return
 		}
 		
-		def loanList = Loan.findAllByBook(bookInstance)
+		def loanList = []
+		bookInstance.volumes.each{ 
+			loanList.push ( Loan.findAllByBook(it) )			
+		}
 
 		[bookInstance: bookInstance, loanList: loanList]
 	}

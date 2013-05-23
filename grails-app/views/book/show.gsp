@@ -73,28 +73,6 @@
 
 				</g:if>
 
-				<g:if test="${bookInstance?.code}">
-					<dt>
-						<g:message code="book.code.label" default="Code" />
-					</dt>
-
-					<dd>
-						<g:fieldValue bean="${bookInstance}" field="code" />
-					</dd>
-
-				</g:if>
-
-				<g:if test="${bookInstance?.publisher}">
-					<dt>
-						<g:message code="book.publisher.label" default="Publisher" />
-					</dt>
-
-					<dd>
-						<g:fieldValue bean="${bookInstance}" field="publisher" />
-					</dd>
-
-				</g:if>
-
 				<g:if test="${bookInstance?.title}">
 					<dt>
 						<g:message code="book.title.label" default="Title" />
