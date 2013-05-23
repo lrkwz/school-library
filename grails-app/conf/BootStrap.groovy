@@ -1,12 +1,11 @@
 import grails.util.Environment
-import groovy.time.TimeCategory
 import it.lrkwz.school.Role
 import it.lrkwz.school.User
 import it.lrkwz.school.UserRole
-import it.lrkwz.school.library.Book;
-import it.lrkwz.school.library.Loan
-import it.lrkwz.school.library.Student;
+import it.lrkwz.school.library.Book
 import it.lrkwz.school.library.School
+import it.lrkwz.school.library.Student
+import it.lrkwz.school.library.Volume
 
 class BootStrap {
 	def grailsApplication
@@ -41,7 +40,7 @@ class BootStrap {
 					println luca.errors
 				}
 
-				def cavallopazzo = new Book(code:"G01", author: "Giovanni Pellegrino", title: "Cavallopazzo", publisher: "Lupetti", library: cavalcanti )
+				def cavallopazzo = new Book(author: "Giovanni Pellegrino", title: "Cavallopazzo", library: cavalcanti,  volumes: [ new Volume(code:"G01", publisher: "Lupetti", publishedOn: Date.parse("yyyyMMdd", "19991231")).save()] )
 				cavallopazzo.save()
 
 				cavallopazzo.addTag("narrativa")
@@ -51,7 +50,7 @@ class BootStrap {
 					println cavallopazzo.errors
 				}
 
-				def rom = new Book(code:"G02", author: "Santino Spinelli", title: "ROM genti libere", publisher: "Dalai Editore", library: cavalcanti )
+				def rom = new Book(author: "Santino Spinelli", title: "ROM genti libere", library: cavalcanti, volumes: [new Volume(code:"G02", publisher: "Dalai Editore", publishedOn: Date.parse("yyyyMMdd", "20031231") )] )
 				rom.save()
 
 				rom.addTag("storia")
