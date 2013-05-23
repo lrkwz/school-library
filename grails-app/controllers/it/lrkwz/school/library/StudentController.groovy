@@ -1,7 +1,11 @@
 package it.lrkwz.school.library
 
+import grails.plugins.springsecurity.Secured
+
 import org.springframework.dao.DataIntegrityViolationException
 
+
+@Secured(['ROLE_ADMIN', 'ROLE_LIBRARIAN'])
 class StudentController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

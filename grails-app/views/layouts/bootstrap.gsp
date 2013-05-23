@@ -47,11 +47,7 @@
 							class="<%= request.forwardURI == "${createLink(uri: '/')}" ? 'active' : '' %>"><a
 							href="${createLink(uri: '/')}"><i
 								class="icon-home icon-white"></i> Home</a></li>
-						<%--<sec:ifLoggedIn>
-								--%>
 						<g:render template="/shared/menu" />
-						<%--</sec:ifLoggedIn>
-						--%>
 					</ul>
 				</div>
 			</div>
