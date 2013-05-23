@@ -49,6 +49,7 @@
 								class="icon-home icon-white"></i> Home</a></li>
 						<g:render template="/shared/menu" />
 					</ul>
+					<g:render template="/shared/currentuser" />
 				</div>
 			</div>
 		</div>
