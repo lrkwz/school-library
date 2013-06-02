@@ -12,18 +12,11 @@ class BootStrap {
 
 	def init = { servletContext ->
 
-		def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
-		def librarianRole = new Role(authority: 'ROLE_LIBRARIAN').save(flush: true)
-		def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
+		def adminRole = createNewRole('ROLE_ADMIN')
+		def librarianRole = createNewRole('ROLE_LIBRARIAN')
+		def userRole = createNewRole('ROLE_USER')
 
-		def administrator = new User(username: 'admin', enabled: true, password: 'admin')
-		administrator.save(flush: true)
-
-		UserRole.create administrator, adminRole, true
-
-		assert User.count() == 1
-		assert Role.count() == 3
-		assert UserRole.count() == 1
+		createAdmin(adminRole)
 
 		switch(Environment.getCurrent()){
 			case Environment.DEVELOPMENT:
@@ -40,7 +33,9 @@ class BootStrap {
 					println luca.errors
 				}
 
-				def cavallopazzo = new Book(author: "Giovanni Pellegrino", title: "Cavallopazzo", library: cavalcanti,  volumes: [ new Volume(code:"G01", publisher: "Lupetti", publishedOn: Date.parse("yyyyMMdd", "19991231")).save()] )
+				def cavallopazzo = new Book(author: "Giovanni Pellegrino", title: "Cavallopazzo", library: cavalcanti,  volumes: [
+					new Volume(code:"G01", publisher: "Lupetti", publishedOn: Date.parse("yyyyMMdd", "19991231")).save()]
+				)
 				cavallopazzo.save()
 
 				cavallopazzo.addTag("narrativa")
@@ -50,7 +45,9 @@ class BootStrap {
 					println cavallopazzo.errors
 				}
 
-				def rom = new Book(author: "Santino Spinelli", title: "ROM genti libere", library: cavalcanti, volumes: [new Volume(code:"G02", publisher: "Dalai Editore", publishedOn: Date.parse("yyyyMMdd", "20031231") )] )
+				def rom = new Book(author: "Santino Spinelli", title: "ROM genti libere", library: cavalcanti, volumes: [
+					new Volume(code:"G02", publisher: "Dalai Editore", publishedOn: Date.parse("yyyyMMdd", "20031231") )]
+				)
 				rom.save()
 
 				rom.addTag("storia")
@@ -67,5 +64,26 @@ class BootStrap {
 		}
 	}
 	def destroy = {
+	}
+
+	def createNewRole(roleName){
+		Role role = Role.findByAuthority(roleName)
+		if(  role == null) {
+			role = new Role(authority: roleName).save(flush: true)
+		}
+		return role
+	}
+
+	def createAdmin(){
+		if( User.findByUsername( 'admin') == null ){
+			def administrator = new User(username: 'admin', enabled: true, password: 'admin')
+			administrator.save(flush: true)
+
+			UserRole.create administrator, adminRole, true
+
+			assert User.count() == 1
+			assert Role.count() == 3
+			assert UserRole.count() == 1
+		}
 	}
 }
