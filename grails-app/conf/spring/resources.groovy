@@ -14,7 +14,4 @@ beans = {
 		defaultLocale = appDefaultLocale
 		java.util.Locale.setDefault(defaultLocale)
 	}
-	customPropertyEditorRegistrar(testapp.CustomPropertyEditorRegistrar) {
-		messageSource = ref('messageSource')
-	}
 }

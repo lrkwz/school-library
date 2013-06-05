@@ -1,6 +1,13 @@
 <%@ page import="it.lrkwz.school.library.Loan" %>
 
 
+<div class="fieldcontain ${hasErrors(bean: loanInstance, field: 'lender', 'error')} required">
+	<label for="lender">
+		<g:message code="loan.lender.label" default="Lender" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="lender" name="lender.id" from="${it.lrkwz.school.library.Student.list()}" optionKey="id" required="" value="${loanInstance?.lender?.id}" class="many-to-one"/>
+</div>
 
 <div class="fieldcontain ${hasErrors(bean: loanInstance, field: 'returnDate', 'error')} ">
 	<label for="returnDate">
@@ -20,18 +27,10 @@
 
 <div class="fieldcontain ${hasErrors(bean: loanInstance, field: 'book', 'error')} required">
 	<label for="book">
-		<g:message code="loan.book.label" default="Book" />
+		<g:message code="loan.book.label" default="Book" />lrkwz: ${bookInstance}
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="book" name="book.id" from="${it.lrkwz.school.library.Book.list()}" optionKey="id" required="" value="${loanInstance?.book?.id}" class="many-to-one"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: loanInstance, field: 'lender', 'error')} required">
-	<label for="lender">
-		<g:message code="loan.lender.label" default="Lender" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="lender" name="lender.id" from="${it.lrkwz.school.library.Student.list()}" optionKey="id" required="" value="${loanInstance?.lender?.id}" class="many-to-one"/>
+	<g:select id="book" name="book.id" from="${bookInstance.getAvailableVolumes()}" optionKey="id" required="" value="${loanInstance?.book?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: loanInstance, field: 'loanDate', 'error')} required">

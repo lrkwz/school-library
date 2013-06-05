@@ -11,7 +11,7 @@ class Loan {
 
 	Volume book;
 	Student lender;
-	Date loanDate;
+	Date loanDate =  new Date();
 	Date expectedReturnDate;
 	Date returnDate = null;
 

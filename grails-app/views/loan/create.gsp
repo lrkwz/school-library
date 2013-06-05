@@ -1,71 +1,94 @@
-<%@ page import="it.lrkwz.school.library.Loan" %>
+<%@ page import="it.lrkwz.school.library.Loan"%>
 <!doctype html>
 <html>
-	<head>
-		<meta name="layout" content="bootstrap">
-		<g:set var="entityName" value="${message(code: 'loan.label', default: 'Loan')}" />
-		<title><g:message code="default.create.label" args="[entityName]" /></title>
-		<r:require module="bootstrap"/>
-	</head>
-	<body>
-		<div class="row-fluid">
-			
-			<div class="span3">
-				<div class="well">
-					<ul class="nav nav-list">
-						<li class="nav-header">${entityName}</li>
-						<li>
-							<g:link class="list" action="list">
-								<i class="icon-list"></i>
-								<g:message code="default.list.label" args="[entityName]" />
-							</g:link>
-						</li>
-						<li class="active">
-							<g:link class="create" action="create">
-								<i class="icon-plus icon-white"></i>
-								<g:message code="default.create.label" args="[entityName]" />
-							</g:link>
-						</li>
-					</ul>
-				</div>
-			</div>
-			
-			<div class="span9">
+<head>
+<meta name="layout" content="bootstrap">
+<g:set var="entityName"
+	value="${message(code: 'loan.label', default: 'Loan')}" />
+<title><g:message code="default.create.label"
+		args="[entityName]" /></title>
+<r:require module="bootstrap" />
+</head>
+<body>
+	<div class="row-fluid">
 
-				<div class="page-header">
-					<h1><g:message code="default.create.label" args="[entityName]" /></h1>
-				</div>
-
-				<g:if test="${flash.message}">
-				<bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
-				</g:if>
-
-				<g:hasErrors bean="${loanInstance}">
-				<bootstrap:alert class="alert-error">
-				<ul>
-					<g:eachError bean="${loanInstance}" var="error">
-					<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-					</g:eachError>
+		<div class="span3">
+			<div class="well">
+				<ul class="nav nav-list">
+					<li class="nav-header">
+						${entityName}
+					</li>
+					<li><g:link class="list" action="list">
+							<i class="icon-list"></i>
+							<g:message code="default.list.label" args="[entityName]" />
+						</g:link></li>
+					<li class="active"><g:link class="create" action="create">
+							<i class="icon-plus icon-white"></i>
+							<g:message code="default.create.label" args="[entityName]" />
+						</g:link></li>
 				</ul>
-				</bootstrap:alert>
-				</g:hasErrors>
-
-				<fieldset>
-					<g:form class="form-horizontal" action="create" >
-						<fieldset>
-							<f:all bean="loanInstance"/>
-							<div class="form-actions">
-								<button type="submit" class="btn btn-primary">
-									<i class="icon-ok icon-white"></i>
-									<g:message code="default.button.create.label" default="Create" />
-								</button>
-							</div>
-						</fieldset>
-					</g:form>
-				</fieldset>
-				
 			</div>
+		</div>
+
+		<div class="span9">
+
+			<div class="page-header">
+				<h1>
+					<g:message code="default.create.label" args="[entityName]" />
+				</h1>
+			</div>
+
+			<g:if test="${flash.message}">
+				<bootstrap:alert class="alert-info">
+					${flash.message}
+				</bootstrap:alert>
+			</g:if>
+
+			<g:hasErrors bean="${loanInstance}">
+				<bootstrap:alert class="alert-error">
+					<ul>
+						<g:eachError bean="${loanInstance}" var="error">
+							<li
+								<g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
+									error="${error}" /></li>
+						</g:eachError>
+					</ul>
+				</bootstrap:alert>
+			</g:hasErrors>
+
+			<fieldset>
+				<g:form class="form-horizontal" action="create">
+					<fieldset>
+						<div class="control-group">
+							<label class="control-label" for="volume.id"> <g:message
+									code="loan.create.volumecode" default="Volume code" />
+							</label>
+							<div class="controls">
+								<g:select name="book.id" from="${ availableVolumes}"
+									optionKey="id" />
+							</div>
+						</div>
+						<f:with bean="loanInstance">
+							<f:field property="lender" />
+							<f:display property="expectedReturnDate">
+								<g:formatDate format="dd MMM yyyy" date="${value}" />
+							</f:display>
+						</f:with>
+						<g:hiddenField name="expectedReturnDate"
+							value="${loanInstance.expectedReturnDate.getDateString() }" />
+
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">
+								<i class="icon-ok icon-white"></i>
+								<g:message code="default.button.create.label" default="Create" />
+							</button>
+						</div>
+					</fieldset>
+				</g:form>
+			</fieldset>
 
 		</div>
-	</body>
+
+	</div>
+</body>
 </html>

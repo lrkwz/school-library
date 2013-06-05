@@ -34,16 +34,24 @@
 				<tbody>
 					<g:each in="${loanList }">
 						<tr>
-							<td><g:link controller="loan" action="show" id="${it.id}">
-									<g:formatDate date="${it.loanDate}" type="date" style="SHORT" />
-								</g:link></td>
-							<td><g:link controller="loan" action="show" id="${it.id}">
-									${it.lender }
-								</g:link></td>
+							<g:if test="${! it.isEmpty() }">
+								<td><g:link controller="loan" action="show" id="${it.id}">
+										<g:formatDate date="${it.loanDate}" type="date" style="SHORT" />
+									</g:link></td>
+								<td><g:link controller="loan" action="show" id="${it.id}">
+										${it.lender }
+									</g:link></td>
+							</g:if>
 						</tr>
 					</g:each>
 				</tbody>
 			</table>
+			<g:if test="${isAvailable }">
+				<g:link class="btn btn-info" controller="loan" action="create"
+					params="[bookId: bookInstance?.id]">
+					<g:message code="book.borrow.label" default="Borrow this book" />
+				</g:link>
+			</g:if>
 		</div>
 
 		<div class="span9">
@@ -84,8 +92,24 @@
 
 				</g:if>
 
-			</dl>
+				<g:if test="${bookInstance?.tags }">
+					<dt>
+						<g:message code="book.tags.label" default="Tags" />
+					</dt>
+					<dd>
+						<g:hiddenField name="tags" value="${bookInstance.tags.join(',')}"
+							disabled="true" />
+					</dd>
+				</g:if>
 
+			</dl>
+			<r:script>
+		    $(function() {
+		      $("#tags").select2({ tags: [],
+		      					tokenSeparators: [",", " "]
+		      					});
+		    });
+			</r:script>
 			<g:form>
 				<g:hiddenField name="id" value="${bookInstance?.id}" />
 				<div class="form-actions">

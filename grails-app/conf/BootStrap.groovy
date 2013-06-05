@@ -46,7 +46,8 @@ class BootStrap {
 				}
 
 				def rom = new Book(author: "Santino Spinelli", title: "ROM genti libere", library: cavalcanti, volumes: [
-					new Volume(code:"G02", publisher: "Dalai Editore", publishedOn: Date.parse("yyyyMMdd", "20031231") )]
+					new Volume(code:"G02", publisher: "Dalai Editore", publishedOn: Date.parse("yyyyMMdd", "20031231") ),
+					new Volume(code:"G03", publisher: "Einaudi", publishedOn: Date.parse("yyyyMMdd", "20131231") )]
 				)
 				rom.save()
 

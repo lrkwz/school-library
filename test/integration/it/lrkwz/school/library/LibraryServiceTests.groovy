@@ -31,15 +31,15 @@ class LibraryServiceTests {
 
 		def luca = new Student( firstName: "Luca", lastName:"Orlandi", school: school).save()
 		def borrowedVolume = libraryService.leanBook(book, luca)
-		assert Book.findByTitle( "Cavallopazzo").getAvailableVolume() != null
+		assert Book.findByTitle( "Cavallopazzo").getAvailableVolumes()
 
 		def mario = new Student( firstName: "Mario", lastName: "Rossi", school: school).save()
 		libraryService.leanBook(book, mario)
-		assert Book.findByTitle( "Cavallopazzo").getAvailableVolume() == null
+		assert Book.findByTitle( "Cavallopazzo").getAvailableVolumes()
 
 		Loan loan = libraryService.returnBook(borrowedVolume, luca)
 		println loan
-		assert Book.findByTitle( "Cavallopazzo").getAvailableVolume() != null
+		assert Book.findByTitle( "Cavallopazzo").getAvailableVolumes()
 	}
 
 	@Test
@@ -54,7 +54,7 @@ class LibraryServiceTests {
 
 		println book
 		assert Book.findByTitle( "Cavallopazzo").count == 1
-		assert Book.findByTitle( "Cavallopazzo").getAvailableVolume() != null
+		assert Book.findByTitle( "Cavallopazzo").getAvailableVolumes()
 	}
 
 	@Test

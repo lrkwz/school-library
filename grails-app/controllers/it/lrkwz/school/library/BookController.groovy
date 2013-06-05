@@ -86,7 +86,7 @@ class BookController {
 			loanList.push ( Loan.findAllByBook(it) )			
 		}
 
-		[bookInstance: bookInstance, loanList: loanList]
+		[bookInstance: bookInstance, loanList: loanList, isAvailable: bookInstance.getAvailableVolumes()]
 	}
 
 	def edit() {

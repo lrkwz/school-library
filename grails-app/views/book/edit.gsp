@@ -61,7 +61,7 @@
 					<g:hiddenField name="version" value="${bookInstance?.version}" />
 					<fieldset>
 						<f:all bean="bookInstance" />
-							<r:script>
+						<r:script>
 						    $(function() {
 						      $("#tags").select2({ tags: ["Scienze_e_natura", "Narrativa", "Storia", "Arte", "Informativo"],
 						      					placeholder: 'tag this book',
@@ -69,8 +69,8 @@
 						      					tokenSeparators: [",", " "]
 						      					});
 						    });
-						  </r:script>
-						<label for="tags" class="control-label">Tags</label>
+						</r:script>
+						<label for="tags" class="control-label"><i class="icon-tag"></i><g:message code="book.tags.label" default="Tags" /></label>
 						<div class="controls">
 							<g:hiddenField name="tags" value="${bookInstance.tags.join(',')}" />
 						</div>

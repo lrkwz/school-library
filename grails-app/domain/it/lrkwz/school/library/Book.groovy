@@ -22,8 +22,8 @@ class Book implements Taggable {
 		return title + " " + volumes*.toString();
 	}
 
-	Volume getAvailableVolume(){
+	Volume[] getAvailableVolumes(){
 		log.debug "There are " + volumes.size() + " volumes"
-		return volumes.find { it.isAvailable == true }
+		return volumes.findAll { it.isAvailable == true }
 	}
 }
